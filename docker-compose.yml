@@ -1,0 +1,27 @@
+version: '3.8'
+name: 'webapp'
+
+services:
+    redisdb:
+        image: redis:7.0.4-alpine
+        container_name: webapp-redis
+    backend:
+        container_name: webapp-backend
+        image: webapp-backend
+        build: ./backend
+        environment:
+            - REDIS_URL=redisdb
+            - REDIS_PORT=6379
+            - PORT=3000
+        ports:
+            - 5000:3000
+        depends_on:
+            - redisdb
+    frontend:
+        container_name: webapp-frontend
+        image: webapp-frontend
+        build: ./frontend
+        ports:
+            - 8080:80
+        depends_on:
+            - backend
