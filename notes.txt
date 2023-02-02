@@ -1,0 +1,18 @@
+Docker setup
+Simple dockerized demo webapp
+
+Tech Stack
+
+    Backend: Nodejs Rest API
+    Frontend: React SPA
+    Database: Redis
+
+DockerHub images:
+    Backend: https://hub.docker.com/repository/docker/muzlee/webapp-backend
+    Frontend: https://hub.docker.com/repository/docker/muzlee/webapp-frontend
+
+
+Setup:
+The frontend sends request to /api -> which is locally proxied to backend
+In production the frontend sends request to /api which goes back to frontend nginx which redirects the request to backend
+This way the backend is not reachable directly just through the nginx server
